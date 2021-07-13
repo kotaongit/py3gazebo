@@ -12,12 +12,12 @@ import socket
 import sys
 import time
 
-from . import msg
-from .msg import gz_string_pb2
-from .msg import gz_string_v_pb2
-from .msg import packet_pb2
-from .msg import publishers_pb2
-from .msg import subscribe_pb2
+import msg
+import gz_string_pb2
+import gz_string_v_pb2
+import packet_pb2
+import publishers_pb2
+import subscribe_pb2
 
 logger = logging.getLogger(__name__)
 
@@ -758,15 +758,15 @@ class Manager(object):
         pass
 
     _MSG_HANDLERS = {
-        'publisher_add': (_handle_publisher_add, msg.publish_pb2.Publish),
-        'publisher_del': (_handle_publisher_del, msg.publish_pb2.Publish),
-        'namespace_add': (_handle_namespace_add, msg.gz_string_pb2.GzString),
+        'publisher_add': (_handle_publisher_add, publish_pb2.Publish),
+        'publisher_del': (_handle_publisher_del, publish_pb2.Publish),
+        'namespace_add': (_handle_namespace_add, gz_string_pb2.GzString),
         'publisher_subscribe': (_handle_publisher_subscribe,
-                                msg.publish_pb2.Publish),
+                                publish_pb2.Publish),
         'publisher_advertise': (_handle_publisher_subscribe,
-                                msg.publish_pb2.Publish),
-        'unsubscribe': (_handle_unsubscribe, msg.subscribe_pb2.Subscribe),
-        'unadvertise': (_handle_unadvertise, msg.publish_pb2.Publish),
+                                publish_pb2.Publish),
+        'unsubscribe': (_handle_unsubscribe, subscribe_pb2.Subscribe),
+        'unadvertise': (_handle_unadvertise, publish_pb2.Publish),
         }
 
 
